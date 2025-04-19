@@ -1,11 +1,11 @@
-/* --- START OF FILE style.css (Completo e Atualizado) --- */
+/* --- START OF FILE style.css (Completo e Atualizado com 80vh) --- */
 
 /* Estilos Globais e Mobile-First */
 body {
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center; /* Centraliza o container verticalmente (haverá espaço acima/abaixo) */
+    align-items: center; /* Centraliza o container verticalmente */
     min-height: 100vh;
     background-color: #f0f0f0;
     font-family: 'Arial', sans-serif;
@@ -29,8 +29,8 @@ body {
 
 .game-container {
     width: 100vw;
-    /* <<< ALTURA AJUSTADA PARA EVITAR BARRA DE NAVEGAÇÃO >>> */
-    height: 90vh;
+    /* <<< ALTURA AJUSTADA PARA 80% da viewport >>> */
+    height: 80vh;
     /* <<< FIM DO AJUSTE >>> */
     border: none;
     position: relative;
@@ -46,15 +46,13 @@ body {
 
 #character {
     width: 11vw;
-    height: 15.4vw; /* Mantém proporção */
+    height: 15.4vw;
     left: 5vw;
     position: absolute;
     bottom: 50px; /* Posicionado acima do chão */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    /* background-image definido via JS */
-    /* z-index: 2; // Opcional */
 }
 
 /* Nuvens */
@@ -75,7 +73,7 @@ body {
 
 @keyframes move-cloud-kf {
     0%   { left: 100%; }
-    100% { left: -25vw; } /* Garante que saia completamente */
+    100% { left: -25vw; }
 }
 
 /* Pulo */
@@ -85,11 +83,12 @@ body {
 }
 
 @keyframes jump-animation {
-    /* Animação relativa ao chão */
-    0%   { bottom: 50px; }
-    /* Pico relativo à viewport + altura do chão */
+    0%   { bottom: 50px; } /* Começa no chão */
+    /* Pico relativo à viewport + altura do chão.
+       O pulo pode parecer ainda mais alto dentro do container de 80vh.
+       Ajuste '35vh' se necessário. */
     50%  { bottom: calc(35vh + 50px); }
-    100% { bottom: 50px; }
+    100% { bottom: 50px; } /* Termina no chão */
 }
 
 /* Ovo */
@@ -101,7 +100,6 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     position: absolute;
-    /* bottom definido via JS */
 }
 
 /* UI: Score e Timer */
@@ -145,7 +143,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Cobre o container de 90vh */
+    height: 100%; /* Cobre o container de 80vh */
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
@@ -174,7 +172,6 @@ body {
 #restart-button:hover, #start-button:hover { background-color: #45a049; }
 
 /* Classe para esconder Overlays */
-/* Use a versão que funcionou para você (!important ou especificidade) */
 #message-overlay.hidden, #start-overlay.hidden {
     display: none !important;
 }
@@ -186,59 +183,30 @@ body {
 @media (min-width: 768px) {
 
     .game-container {
-        /* Tamanho fixo maior */
+        /* Tamanho fixo maior mantido */
         width: 450px;
         height: 750px;
         border: 3px solid black;
     }
 
-    #character {
-        /* Tamanho e posição fixos */
-        width: 50px;
-        height: 70px;
-        left: 40px;
-        bottom: 50px; /* Acima do chão */
-    }
-
-    /* Nuvens para telas maiores */
-     .cloud-1 { width: 100px; height: 60px; animation-duration: 50s; }
-     .cloud-2 { width: 70px; height: 40px; animation-duration: 35s; }
-     .cloud-3 { width: 120px; height: 70px; animation-duration: 60s; }
-
-     /* Animação da nuvem para telas maiores */
-     @keyframes move-cloud-kf {
-        0% { left: 100%; }
-        100% { left: -130px; } /* Sai completamente pela esquerda */
-     }
-
-    /* Pulo para telas maiores */
+    #character { width: 50px; height: 70px; left: 40px; bottom: 50px; }
+    .cloud-1 { width: 100px; height: 60px; animation-duration: 50s; }
+    .cloud-2 { width: 70px; height: 40px; animation-duration: 35s; }
+    .cloud-3 { width: 120px; height: 70px; animation-duration: 60s; }
+    @keyframes move-cloud-kf { 0% { left: 100%; } 100% { left: -130px; } }
     @keyframes jump-animation {
         0%   { bottom: 50px; }
-        /* Altura fixa do pulo + altura do chão */
         50%  { bottom: calc(280px + 50px); }
         100% { bottom: 50px; }
     }
-
-    /* Ovo para telas maiores */
-    .egg {
-        width: 35px;
-        height: 45px;
-    }
-
-    /* UI para telas maiores */
+    .egg { width: 35px; height: 45px; }
     #score, #timer { top: 10px; font-size: 1.5em; }
     #score { left: 15px; }
     #timer { right: 15px; }
-
-    /* Logos para telas maiores */
     #start-logo { max-width: 280px; margin-bottom: 30px; }
     #gameplay-logo { top: 15px; height: 45px; }
-
-    /* Overlays para telas maiores */
     #message-overlay, #start-overlay { font-size: 1.8em; padding: 20px; }
-
-    /* Botões para telas maiores */
     #restart-button, #start-button { padding: 15px 30px; font-size: 1em; }
 }
 
-/* --- END OF FILE style.css (Completo e Atualizado) --- */
+/* --- END OF FILE style.css (Completo e Atualizado com 80vh) --- */
